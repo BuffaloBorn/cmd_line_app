@@ -1,38 +1,68 @@
 require "thor"
 
+   RECIPES = [
+    { 
+        title: "Ratatouille",
+        cooking_time: "60 min",
+        ingredients: %w{potatoes carrots onions zucchini tomatoes}
+     }, 
+     {
+         title: "Mac & Cheese",
+         cooking_time: "20 min",
+         ingredients: %w{macarroni cheese onions mustard milk}
+      }, 
+	   
+      {
+         title: "Caesar Salad",
+         cooking_time: "10 min",
+         ingredients: %w{chicken lettuce croutons eggs}
+       }
+    ]
+
+
+class Recipes < Thor
+ desc "add --title --cooking-time --description", "Add a new recipe."
+ option :title, required: true
+ option :cooking_time, required: true
+ option :description, required: true
+ 
+ def add #app.rb recipes add --title="" --time="" --description=""
+  recipe = {
+    title: options[:title], 
+    cooking_time: options[:cooking_time],
+    description: options[:description]
+   }
+  
+   RECIPES << recipe
+
+
+  RECIPES.each do |recipe|
+    puts recipe[:title]
+  end
+ end
+
+
+end
+
 class App < Thor
  desc "hello WORD", "Print 'Hello, WORD' to the screen."
  def hello word
   puts "Hello #{word}"
  end
 
+ desc "recipes", "Manage recipes"
+ subcommand "recipes", Recipes  # app.rb recipes list
+				# app.rb recipes add 
+				
+
  desc "list_recipes [KEYWORD][OPTIONS]", "List all recipes. If the keyword is given, it filters the list based off it"
- option :format, required: true
+ option :format
  option :show_time, type: :boolean, default:true #--show-time --no-show-time
  def list_recipes keyword=nil
 	
-
-        recipes = [
-	 { 
-            title: "Ratatouille",
-            cooking_time: "60 min",
-            ingredients: %w{potatoes carrots onions zucchini tomatoes}
-          }, 
-	    {
-            title: "Mac & Cheese",
-            cooking_time: "20 min",
-            ingredients: %w{macarroni cheese onions mustard milk}
-          }, 
-	    {
-            title: "Caesar Salad",
-            cooking_time: "10 min",
-            ingredients: %w{chicken lettuce croutons eggs}
-          }
-	]
-
-	
-        recipes_to_be_listed = if keyword.nil? then recipes
-                               else recipes.select {|recipe| recipe[:title].downcase.include? keyword.downcase}
+      recipes = RECIPES
+      recipes_to_be_listed = if keyword.nil? then recipes
+                             else recipes.select {|recipe| recipe[:title].downcase.include? keyword.downcase}
 
 			       end
 
