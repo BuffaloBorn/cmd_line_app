@@ -7,7 +7,8 @@ class App < Thor
  end
 
  desc "list_recipes [KEYWORD][OPTIONS]", "List all recipes. If the keyword is given, it filters the list based off it"
- option :format
+ option :format, required: true
+ option :show_time, type: :boolean, default:true #--show-time --no-show-time
  def list_recipes keyword=nil
 	
 
@@ -58,7 +59,12 @@ class App < Thor
   end
 
   def print_oneline recipe
-	puts %Q{#{recipe[:title]} (#{recipe[:cooking_time]})}
+     if options[:show_time]
+        time = "(#{recipe[:cooking_time]})"
+     else
+	time =""
+     end
+	puts %Q{#{recipe[:title]} #{time}}
   end
 
 end
