@@ -7,7 +7,9 @@ class App < Thor
  end
 
  desc "list_recipes [KEYWORD][OPTIONS]", "List all recipes. If the keyword is given, it filters the list based off it"
+ option :format
  def list_recipes keyword=nil
+   puts options[:format]
         recipes = [
 	 { 
             title: "Ratatouille",
