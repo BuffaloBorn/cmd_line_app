@@ -37,7 +37,11 @@ class App < Thor
 
 
 	recipes_to_be_listed.each do |recipe|
+	 if options[:format].nil?
 	  print_default recipe	
+	 else options[:format] == "oneline"
+	  print_oneline recipe
+	 end
 	end
 
 			         
@@ -51,6 +55,10 @@ class App < Thor
 	puts "It takes: #{recipe[:cooking_time]} to cook"
 	puts "The ingredients are: #{recipe[:ingredients].join(", ")}"
 	puts ""
+  end
+
+  def print_oneline recipe
+	puts %Q{#{recipe[:title]} (#{recipe[:cooking_time]})}
   end
 
 end
