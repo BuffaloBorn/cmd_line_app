@@ -9,7 +9,8 @@ class App < Thor
  desc "list_recipes [KEYWORD][OPTIONS]", "List all recipes. If the keyword is given, it filters the list based off it"
  option :format
  def list_recipes keyword=nil
-   puts options[:format]
+	
+
         recipes = [
 	 { 
             title: "Ratatouille",
@@ -36,15 +37,22 @@ class App < Thor
 
 
 	recipes_to_be_listed.each do |recipe|
-		puts "--------------------"
-		puts "Recipe: #{recipe[:title]}"
-		puts "It takes: #{recipe[:cooking_time]} to cook"
-		puts "The ingredients are: #{recipe[:ingredients].join(", ")}"
-		puts ""
+	  print_default recipe	
 	end
 
 			         
  end
+
+ private 
+
+  def print_default recipe
+	puts "--------------------"
+	puts "Recipe: #{recipe[:title]}"
+	puts "It takes: #{recipe[:cooking_time]} to cook"
+	puts "The ingredients are: #{recipe[:ingredients].join(", ")}"
+	puts ""
+  end
+
 end
 
 App.start ARGV
