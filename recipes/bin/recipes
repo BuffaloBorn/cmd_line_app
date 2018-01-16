@@ -50,7 +50,7 @@ desc 'Describe list here'
 arg_name 'Describe arguments to list here'
 command :list do |c|
   c.desc "Show the cooking time for the recipes"
-  c.switch :show_time
+  c.switch [:show_time, :s] 
   c.action do |global_options,options,args|
     puts "list command ran"
   end
