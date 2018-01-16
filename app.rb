@@ -22,9 +22,9 @@ require "thor"
 
 class Recipes < Thor
  desc "add", "Add a new recipe."
- option :title, required: true
- option :cooking_time, required: true
- option :description, required: true
+ option :title, required: true, aliases: "-t"
+ option :cooking_time, required: true, aliases: "-c"
+ option :description, required: true, aliases: "-d"
  
  def add #app.rb recipes add --title="" --time="" --description=""
   recipe = {
