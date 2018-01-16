@@ -21,7 +21,7 @@ require "thor"
 
 
 class Recipes < Thor
- desc "add --title --cooking-time --description", "Add a new recipe."
+ desc "add", "Add a new recipe."
  option :title, required: true
  option :cooking_time, required: true
  option :description, required: true
