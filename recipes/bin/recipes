@@ -49,8 +49,10 @@ end
 desc 'Describe list here'
 arg_name 'Describe arguments to list here'
 command :list do |c|
+  c.default_value false
   c.desc "Show the cooking time for the recipes"
   c.switch [:hide_time, :h] 
+  c.flag :format
   c.action do |global_options,options,args|
     puts "list command ran"
   end
