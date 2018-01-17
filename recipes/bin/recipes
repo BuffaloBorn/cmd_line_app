@@ -52,6 +52,7 @@ command :list do |c|
   c.default_value false
   c.desc "Show the cooking time for the recipes"
   c.switch [:hide_time, :h] 
+  c.default_value "default"
   c.flag :format
   c.action do |global_options,options,args|
     puts "list command ran"
